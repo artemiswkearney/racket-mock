@@ -28,8 +28,7 @@
 (define-for-syntax (with-mocks/nested stx)
   (raise-syntax-error #f "nested use of with-mocks not allowed" stx))
 
-(define-syntax-parameter with-mocks
+(define-syntax with-mocks
   (syntax-parser
     [(_ proc:id/mock body:expr ...)
-     #'(syntax-parameterize ([with-mocks with-mocks/nested])
-         (with-mocks/impl proc body ...))]))
+     #'(with-mocks/impl proc body ...)]))
